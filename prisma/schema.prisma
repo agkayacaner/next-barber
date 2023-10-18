@@ -38,14 +38,15 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?       @unique
   emailVerified DateTime?
   image         String?
-  isAdmin       Boolean   @default(false)
+  isAdmin       Boolean       @default(false)
   accounts      Account[]
   sessions      Session[]
+  appointments  Appointment[]
 }
 
 model VerificationToken {
@@ -54,4 +55,39 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model WorkingHours {
+  id   Int    @id @default(autoincrement())
+  hour String
+}
+
+model Service {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+  price       Int
+  duration    Int
+}
+
+model Barber {
+  id            Int           @id @default(autoincrement())
+  name          String
+  email         String?       @unique
+  emailVerified DateTime?
+  image         String?
+  appointments  Appointment[]
+}
+
+model Appointment {
+  id        Int     @id @default(autoincrement())
+  serviceId Int
+  date      String
+  hour      String
+  barberId  Int
+  barber    Barber  @relation(fields: [barberId], references: [id])
+  userEmail String
+  user      User    @relation(fields: [userEmail], references: [email])
+  status    Int     @default(0)
+  note      String?
 }
