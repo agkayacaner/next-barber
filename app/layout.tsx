@@ -9,6 +9,20 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Berber Randevusu",
   description: "Berber Randevusu",
+  icons: {
+    icon: [
+      {
+        media: "(prefers-color-scheme: light)",
+        url: "/logo.svg",
+        href: "/logo.svg",
+      },
+      {
+        media: "(prefers-color-scheme: dark)",
+        url: "/logo-dark.svg",
+        href: "/logo-dark.svg",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -25,6 +39,7 @@ export default function RootLayout({
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
+            storageKey="theme"
           >
             {children}
           </ThemeProvider>
