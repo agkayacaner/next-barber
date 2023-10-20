@@ -1,15 +1,15 @@
 "use client";
 
-import { Appointment } from "@/types/types";
+import { User } from "@/types/types";
 import { columns } from "./column";
 import { DataTable } from "./data-table";
 import { useQuery } from "@tanstack/react-query";
 
-const Appointments = () => {
-  const { isPending, error, data } = useQuery<Appointment[]>({
-    queryKey: ["appointments"],
+const Customers = () => {
+  const { isPending, error, data } = useQuery<User[]>({
+    queryKey: ["customers"],
     queryFn: () =>
-      fetch("http://localhost:3000/api/appointments").then((res) => res.json()),
+      fetch("http://localhost:3000/api/customers").then((res) => res.json()),
   });
 
   return (
@@ -22,11 +22,11 @@ const Appointments = () => {
         ) : error ? (
           <div>Error: {error.message}</div>
         ) : (
-          <DataTable columns={columns} data={data || []} />
+          <DataTable columns={columns} data={data ?? []} />
         )}
       </div>
     </div>
   );
 };
 
-export default Appointments;
+export default Customers;

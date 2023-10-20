@@ -17,7 +17,6 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-      <h3>Merhaba</h3>
       <Button asChild>
         <Link href="/create-appointment">Randevu Al</Link>
       </Button>

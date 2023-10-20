@@ -29,6 +29,12 @@ const Navbar = () => {
         >
           Randevular
         </Link>
+        <Link
+          href="/admin/customers"
+          className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        >
+          Müşteriler
+        </Link>
       </nav>
       <div className="flex items-center space-x-5">
         <ModeToggle />

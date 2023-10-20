@@ -2,21 +2,42 @@ import { getAuthSession } from "@/utils/auth";
 import { prisma } from "@/utils/connect";
 import { NextRequest, NextResponse } from "next/server";
 
-// FETCH ALL ORDERS
-export const GET = async () => {
+export const GET = async (req: NextRequest) => {
   try {
-    const barbers = await prisma.barber.findMany({
+    const { id } = req.query;
+    const user = await prisma.user.findUnique({
+      where: {
+        id: id,
+      },
       select: {
         id: true,
         name: true,
         email: true,
+        phoneNumber: true,
         appointments: {
           select: {
             id: true,
+            status: true,
             date: true,
             hour: true,
             note: true,
             serviceId: true,
+
+            service: {
+              select: {
+                id: true,
+                name: true,
+                price: true,
+              },
+            },
+
+            barber: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+              },
+            },
             user: {
               select: {
                 id: true,
@@ -28,14 +49,10 @@ export const GET = async () => {
         },
       },
     });
-    return new NextResponse(JSON.stringify(barbers), { status: 200 });
+    return new NextResponse(JSON.stringify(user), { status: 200 });
   } catch (e) {
     return new NextResponse(JSON.stringify({ message: "Bir Hata Oluştu" }), {
       status: 500,
     });
   }
-};
-
-export const POST = async () => {
-  return new NextResponse("Merhaba", { status: 200 });
 };

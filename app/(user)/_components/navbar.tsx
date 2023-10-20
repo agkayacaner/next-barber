@@ -19,7 +19,9 @@ const Navbar = () => {
   const { data } = useSession();
   return (
     <div className="h-16 px-5 flex items-center justify-between dark:bg-black border-b">
-      <Logo />
+      <Link href="/">
+        <Logo />
+      </Link>
       <div className="flex items-center space-x-5">
         <ModeToggle />
 

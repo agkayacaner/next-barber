@@ -9,6 +9,7 @@ declare module "next-auth" {
   interface Session {
     user: User & {
       isAdmin: boolean;
+      phoneNumber: string;
     };
   }
 }
@@ -16,6 +17,7 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     isAdmin: boolean;
+    phoneNumber: string;
   }
 }
 
@@ -34,6 +36,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (token) {
         session.user.isAdmin = token.isAdmin;
+        session.user.phoneNumber = token.phoneNumber;
       }
 
       return session;
@@ -46,6 +49,7 @@ export const authOptions: NextAuthOptions = {
       });
 
       token.isAdmin = userInDb?.isAdmin!;
+      token.phoneNumber = userInDb?.phoneNumber!;
 
       return token;
     },
