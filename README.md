@@ -1,3 +1,5 @@
+![alt text](https://github.com/agkayacaner/next-barber/blob/main/public/cover.jpg)
+
 Berber Randevu Uygulaması
 
 Müşteriler giriş yaptıktan sonra istediklere tarihte, berberin diğer randevu saatleri doğrultusunda boş bir saat seçip daha sonra hizmet seçtikten sonra randevu talebi oluşturabilecekler.
