@@ -21,12 +21,17 @@ export default function Home() {
       <Button asChild>
         <Link href="/create-appointment">Randevu Al</Link>
       </Button>
-      <Link href="/profile" className="mt-20">
-        Profil
-      </Link>
-      <Link href="/login" className="mt-20">
-        Giriş Yap
-      </Link>
+      {status === "authenticated" ? (
+        <Link href="/profile" className="mt-20">
+          Profil
+        </Link>
+      ) : (
+        <Button variant="ghost" asChild>
+          <Link href="/login" className="mt-20">
+            Giriş Yap
+          </Link>
+        </Button>
+      )}
     </main>
   );
 }

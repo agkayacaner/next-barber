@@ -2,15 +2,20 @@
 import { useSession } from "next-auth/react";
 import Navbar from "./_components/navbar";
 import { useRouter } from "next/navigation";
+import { ReactNode } from "react";
 
-const UserLayout = ({ children }: { children: React.ReactNode }) => {
-  const { status, loading } = useSession();
-  const route = useRouter();
+interface UserLayoutProps {
+  children: ReactNode;
+}
 
-  if (loading) return <div>Loading...</div>;
+const UserLayout = ({ children }: UserLayoutProps) => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  if (status === "loading") return <div>Loading...</div>;
 
   if (status === "unauthenticated") {
-    route.replace("/");
+    router.replace("/login");
     return <div>Redirecting...</div>;
   }
 

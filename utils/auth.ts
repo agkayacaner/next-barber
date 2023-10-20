@@ -3,6 +3,8 @@ import { NextAuthOptions, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "./connect";
 
+import { User } from "@prisma/client";
+
 declare module "next-auth" {
   interface Session {
     user: User & {
